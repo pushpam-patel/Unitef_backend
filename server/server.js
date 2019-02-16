@@ -5,52 +5,52 @@ let bodyParser = require('body-parser');
 var TeleSignSDK = require('telesignsdk');
 
 let { register } = require('./models/registerm.js');
-let { login } = require('./models/loginm.js');
 let { driver } = require('./models/driverm.js');
+let { group } = require('./models/groupm.js');
 let { passenger } = require('./models/passengerm.js')
 
-//let { mongoose } = require('./db/mongoose.js');
+let { mongoose } = require('./db/mongoose.js');
 
-const pubilcPath = path.join(__dirname,'../Frontend')
+//const pubilcPath = path.join(__dirname,'../Frontend')
 
 let app = express();
 let port = process.env.PORT || 3000;
 
-const customerId = "6D30E7A8-D40B-4652-8A33-A90A1F97F11B";
-const apiKey = "k3Jkr+UJe6ZiddKOCbgMIa6SZ+4LqoUI4AuAgLMCN59VgcCGxDCKF6zjBCi3nrbO+HSshEqpiGboY+lbSFi1Ow==";
-const rest_endpoint = "https://rest-api.telesign.com";
-const timeout = 10*1000; // 10 secs
+// const customerId = "6D30E7A8-D40B-4652-8A33-A90A1F97F11B";
+// const apiKey = "k3Jkr+UJe6ZiddKOCbgMIa6SZ+4LqoUI4AuAgLMCN59VgcCGxDCKF6zjBCi3nrbO+HSshEqpiGboY+lbSFi1Ow==";
+// const rest_endpoint = "https://rest-api.telesign.com";
+// const timeout = 10*1000; // 10 secs
 
-const client = new TeleSignSDK( customerId,
-    apiKey,
-    rest_endpoint,
-    timeout // optional
-    // userAgent
-);
+// const client = new TeleSignSDK( customerId,
+//     apiKey,
+//     rest_endpoint,
+//     timeout // optional
+//     // userAgent
+// );
 
-const phoneNumber = "919003303579";
-const message = "You're scheduled for a dentist appointment at 2:30PM.";
-const messageType = "ARN";
+// const phoneNumber = "919003303579";
+// const message = "You're scheduled for a dentist appointment at 2:30PM.";
+// const messageType = "ARN";
 
-console.log("## MessagingClient.message ##");
+// console.log("## MessagingClient.message ##");
 
-function messageCallback(error, responseBody) {
-    if (error === null) {
-        console.log(`Messaging response for messaging phone number: ${phoneNumber}` +
-            ` => code: ${responseBody['status']['code']}` +
-            `, description: ${responseBody['status']['description']}`);
-    } else {
-        console.error("Unable to send message. " + error);
-    }
-}
-client.sms.message(messageCallback, phoneNumber, message, messageType);
+// function messageCallback(error, responseBody) {
+//     if (error === null) {
+//         console.log(`Messaging response for messaging phone number: ${phoneNumber}` +
+//             ` => code: ${responseBody['status']['code']}` +
+//             `, description: ${responseBody['status']['description']}`);
+//     } else {
+//         console.error("Unable to send message. " + error);
+//     }
+// }
+// client.sms.message(messageCallback, phoneNumber, message, messageType);
 
 
 app.use(express.static(pubilcPath));
 app.use(bodyParser.json())
 
 app.get('/users',(req,res)=>{
-    User.find().then((users)=>{
+    register.find().then((users)=>{
         res.send({users})
     }).catch((err)=>{
         res.status(400).send(err)
@@ -58,23 +58,47 @@ app.get('/users',(req,res)=>{
 })
 
 app.get('/driver',(req,res)=>{
-    User.find().then((users)=>{
-        res.send({users})
+    driver.find().then((drivers)=>{
+        res.send({drivers})
     }).catch((err)=>{
         res.status(400).send(err)
     })
 })
 
 app.get('/passenger',(req,res)=>{
-    User.find().then((users)=>{
-        res.send({users})
+    passenger.find().then((passengers)=>{
+        res.send({passengers})
+    }).catch((err)=>{
+        res.status(400).send(err)
+    })
+})
+
+app.get('/group',(req,res)=>{
+    group.find().then((groups)=>{
+        res.send({groups})
+    }).catch((err)=>{
+        res.status(400).send(err)
+    })
+})
+
+app.post('/group', (req, res) => {
+    let group= new group({
+        named:req.body.named,
+        namep:req.body.namep,
+        pnumberd:req.body.pnumberd,
+        pnumberp:req.body.pnumberp,
+        emaild:req.body.emaild
+    })
+
+    group.save().then((doc)=>{
+        res.send(doc)
     }).catch((err)=>{
         res.status(400).send(err)
     })
 })
 
 app.post('/users', (req, res) => {
-    let user= new User({
+    let register= new register({
         first_name:req.body.first_name,
         last_name:req.body.last_name,
         email:req.body.email,
