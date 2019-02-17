@@ -22,15 +22,21 @@ let register= mongoose.model('register',{
     aadhar:{
         type:Number,
         require:true,
-        trim:true,
         minlength:12
     },
     pnumber:{
         type:Number,
         require:true,
-        trim:true,
         minlength:10
     },
+    password:{
+        type: String,
+        require:true,
+        minlength:5
+    },
+    balance:{
+        type: Number
+    }
 
 })
 
