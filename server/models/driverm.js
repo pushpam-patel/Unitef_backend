@@ -21,6 +21,7 @@ let driver=mongoose.model('driver',{
         trim:true,  
     },
     time:{
+        type: String,
         require:true
     },
     maxs:{

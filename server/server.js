@@ -46,7 +46,7 @@ let port = process.env.PORT || 3000;
 // client.sms.message(messageCallback, phoneNumber, message, messageType);
 
 
-app.use(express.static(pubilcPath));
+// app.use(express.static(pubilcPath));
 app.use(bodyParser.json())
 
 app.get('/users',(req,res)=>{

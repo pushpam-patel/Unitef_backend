@@ -10,6 +10,7 @@ let passenger = mongoose.model('passenger',{
         require:true
     },
     time:{
+        type: String,
         require:true
     },
 })
