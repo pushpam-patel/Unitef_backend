@@ -108,7 +108,7 @@ app.post('/users', (req, res) => {
         balance:req.body.balance
     })
 
-    user.save().then((doc)=>{
+    register.save().then((doc)=>{
         res.send(doc)
     }).catch((err)=>{
         res.status(400).send(err)
