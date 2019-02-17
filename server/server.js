@@ -99,12 +99,13 @@ app.post('/group', (req, res) => {
 
 app.post('/users', (req, res) => {
     let register= new register({
-        first_name:req.body.first_name,
-        last_name:req.body.last_name,
+        first_Name:req.body.first_Name,
+        last_Name:req.body.last_Name,
         email:req.body.email,
         pnumber:req.body.pnumber,
         aadhar:req.body.aadhar,
-        password:req.body.password
+        password:req.body.password,
+        balance:req.body.balance
     })
 
     user.save().then((doc)=>{
