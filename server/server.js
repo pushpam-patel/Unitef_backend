@@ -136,10 +136,6 @@ app.post('/driver', (req, res) => {
 })
 
 
-app.listen(port,()=>{
-    console.log(port)
-})
-
 app.post('/passenger', (req, res) => {
     let passenger= new passenger({
         name:req.body.name,
@@ -160,6 +156,6 @@ app.post('/passenger', (req, res) => {
 
 
 app.listen(port,()=>{
-    console.log(port)
+    console.log(`up on ${port}`)
 })
 
