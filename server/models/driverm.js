@@ -28,6 +28,21 @@ let driver=mongoose.model('driver',{
         type: Number,
         trim:true
     },
+    name:{
+        type: String,
+        minlength:1
+    },
+    pnumber:{
+        type:Number,
+        require:true,
+        minlength:10
+    },
+    latitude:{
+        type:Number
+    },
+    longitude:{
+        type:Number
+    }
     
 })
 

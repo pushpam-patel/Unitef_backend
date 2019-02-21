@@ -126,7 +126,7 @@ app.post('/driver', (req, res) => {
         time:req.body.time,
         maxs:req.body.maxs,
         latitude:req.body.latitude,
-        longitudde:req.body.longitude
+        longitude:req.body.longitude
     })
 
     user.save().then((doc)=>{
