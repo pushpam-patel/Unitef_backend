@@ -129,7 +129,7 @@ app.post('/driver', (req, res) => {
         longitude:req.body.longitude
     })
 
-    user.save().then((doc)=>{
+    driver.save().then((doc)=>{
         res.send(doc)
     }).catch((err)=>{
         res.status(400).send(err)
@@ -148,7 +148,7 @@ app.post('/passenger', (req, res) => {
         longitudde:req.body.longitude
     })
 
-    user.save().then((doc)=>{
+    passenger.save().then((doc)=>{
         res.send(doc)
     }).catch((err)=>{
         res.status(400).send(err)
