@@ -2,37 +2,22 @@ const mongoose = require('mongoose');
 
 let register= mongoose.model('register',{
     first_Name:{
-        type: String,
-        required: true,
-        trim:true,
-        minlength:1
+        type: String
     },
     last_Name:{
-        type: String,
-        required:true,
-        trim:true,
-        minlength:1
+        type: String
     },
     email:{
-        type: String,
-        require:true,
-        trim:true,
-        minlength:5
+        type: String
     },
     aadhar:{
-        type:Number,
-        require:true,
-        minlength:12
+        type:Number
     },
     pnumber:{
-        type:Number,
-        require:true,
-        minlength:10
+        type:Number
     },
     password:{
-        type: String,
-        require:true,
-        minlength:5
+        type: String
     },
     balance:{
         type: Number
